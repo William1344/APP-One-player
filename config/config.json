@@ -1,0 +1,26 @@
+{
+  "development": {
+    "username": "root",
+    "password": "cavalo",
+    "database": "one_player",
+    "host": "localhost",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "database_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "root",
+    "password": null,
+    "database": "database_production",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "migrationStorage":"json",
+  "migrationStorageTableSchema": "custom_schema",
+  "urlRootNode": "http://192.168.0.14:3001/"
+} 
