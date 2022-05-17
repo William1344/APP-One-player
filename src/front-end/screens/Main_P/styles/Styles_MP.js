@@ -28,8 +28,7 @@ const styles_MP = StyleSheet.create({
             alignItems      : 'center',
             width           : '100%',
             height          : '70%',
-            marginTop       : 10,
-        }, 
+        },
             textAviso:{
                 width : '60%',
                 textAlign: 'justify',
@@ -40,7 +39,6 @@ const styles_MP = StyleSheet.create({
             flatLiga:{
                 flex: 1,
                 width: '99%',
-
             },   
     viewBttns:{
         flexDirection: 'row',
@@ -149,7 +147,7 @@ const styles_MP = StyleSheet.create({
                 width: '40%',
                 height: '10%',
                 borderRadius: 10,
-                marginTop: 5,
+                marginTop: 10,
                 backgroundColor: Cor.btt,
                 ...styles.border1,
             },

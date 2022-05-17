@@ -13,8 +13,8 @@ import configsBD from '../../../../config/config.json';
 
 export default function Cadastro(){
     const navigation = useNavigation();
-    const [textName, setName] = useState("Beatriz");
-    const [textEmail, setEmail] = useState("Bea@gmail.com");
+    const [textName, setName] = useState("Beat");
+    const [textEmail, setEmail] = useState("Beaasd@gmail.com");
     const [textPasword, setPasword] = useState("123");
     
     useEffect(() => {

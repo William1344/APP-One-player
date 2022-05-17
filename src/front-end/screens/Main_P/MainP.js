@@ -53,8 +53,7 @@ export default function Main_Players(){
         return true;
     }
 
-    async function PersisteUser(){
-         
+    async function PersisteUser(){     
         let reqs = await fetch(confgBD.urlRootNode + "persistUser",{
             method: "POST",
             headers: {
@@ -63,7 +62,7 @@ export default function Main_Players(){
             },
             body: JSON.stringify({
                 idUser : banco.userMaster.id,
-                peds   : 2,//banco.pedidos.length,
+                peds   : banco.pedidos.length,
                 ligas  : banco.ligas.length,
                 jogos  : banco.userMaster.scrT.jogos,
             })
@@ -77,7 +76,6 @@ export default function Main_Players(){
             setRender(!rend);
             SalveDados(banco);
         } 
- 
     }
 
     useEffect(() => {
@@ -275,7 +273,6 @@ export default function Main_Players(){
         );
     }
     
-
     //console.log(bd)
     return( 
         <View style = {stylesMP.telaFull}>
@@ -344,5 +341,4 @@ export default function Main_Players(){
             </View>
         </View>
     );
-
 }

@@ -1,21 +1,23 @@
 import React, {useEffect, useState} from 'react';
 import {
-        Text, View, TouchableOpacity, Alert, Image, TextInput, 
-        KeyboardAvoidingView, Keyboard, StatusBar
+    Text, View, TouchableOpacity, Alert, Image, TextInput, 
+    KeyboardAvoidingView, Keyboard, StatusBar, Modal
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import styles from './stylesL';
 import assets from '../../../../assets/index_assets';
+//import configBD from '../../../../config/config.json';
 import configBD from '../../../../config/config.json';
 import banco from '../../../back-end2/banco_local'; 
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
-import { LigaV, User_LigaV, User_GameM, User_GameV, JogoV, UserV } from "../../../back-end2/modelos/indexVars";
+import CompLoad from '../Load/CompLoad';
 
 export default function Login(){
     const navigation            = useNavigation();
-    const [textName, setName]   = useState("indra@gmail.com");
+    const [textName, setName]   = useState("will@gmail.com");
     const [textSenha, setSenha] = useState("123");
+    const [modLoad, setModLoad] = useState(false);
+
     let totalPnts = 0;
     useEffect(()=>{
         totalPnts = 0; // zera total pontos
@@ -27,8 +29,9 @@ export default function Login(){
     }, []);
 
     const verifLogin = async function(nm, sn){
-        //console.log("entrou-> ",nm,sn)
-        let reqs = await fetch(configBD.urlRootNode+"login_user",{
+        setModLoad(true);
+        console.log("entrou-> ",configBD.urlRootNode)
+        let reqs = await fetch(configBD.urlRootNode +'login_user',{
             method: 'POST',
             headers: {
                 'Accept':'application/json',
@@ -37,7 +40,7 @@ export default function Login(){
             body: JSON.stringify({
                 email      : nm,
                 password   : sn,
-            }),
+            })
         });
         let ress = await reqs.json();
         //console.log("UserM aqui=> ", ress);
@@ -50,12 +53,26 @@ export default function Login(){
             navigation.replace("MainP");
             //console.log("Array com as ligas!", ress.ligs);
         }else {
+            setModLoad(false);
             console.log("Erro ao fazer login");
         }
         
     }
 
-
+    function renderModal(){
+        return (
+            <Modal 
+                animationType="slide"
+                transparent={true}
+                visible={modLoad}
+                onRequestClose={() => {
+                    setModLoad(!modLoad);
+                }}
+            >
+                <CompLoad/>
+            </Modal>
+        );
+    }
 
     async function _salveData(banco){
         try{
@@ -66,12 +83,15 @@ export default function Login(){
         }
     }
 
+
+
     function cadastrar(){
         navigation.replace("Cadastro");
     }
     
     return(
         <View style = {styles.telaFull}>
+            {renderModal()}
             <StatusBar
                 hidden = {true}
                 barStyle="ligth-content"

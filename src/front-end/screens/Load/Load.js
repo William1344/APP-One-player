@@ -5,8 +5,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Font from 'expo-font';
 import configBD from '../../../../config/config.json';
 import banco from '../../../back-end2/banco_local';
-import assets from '../../../../assets/index_assets';
 import SalveDate from '../../../back-end2/SalveData';
+import CompLoad from './CompLoad';
 //import styles from '../comp/Styles'
 
 export default function Load(){
@@ -85,9 +85,9 @@ export default function Load(){
         fontes();
         
         setTimeout(()=>{
-            checkToken();
-            //_removeTokens();    
-            //navigation.replace("Login");
+            //checkToken();
+            _removeTokens();    
+            navigation.replace("Login");
         },1500);
         
     },[]);
@@ -99,22 +99,6 @@ export default function Load(){
     }
 
     return(
-        <View style = {{flex: 1, alignItems: 'center'}}>
-            <ImageBackground
-                style ={{
-                    justifyContent: "center",
-                    alignItems: 'center',
-                    width: '100%',
-                    height: '100%'}}
-                    
-                source={assets.load1}
-                resizeMode="cover">
-                    <ActivityIndicator
-                        size = "large"
-                        color = "#FFF"
-                    />
-            </ImageBackground>
-            
-        </View>
+        <CompLoad/>
     );
 }
