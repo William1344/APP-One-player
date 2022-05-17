@@ -14,7 +14,7 @@ import CompLoad from '../Load/CompLoad';
 
 export default function Login(){
     const navigation            = useNavigation();
-    const [textName, setName]   = useState("amitiel@gmail.com");
+    const [textName, setName]   = useState("will@gmail.com");
     const [textSenha, setSenha] = useState("123");
     const [modLoad, setModLoad] = useState(false);
 
@@ -34,7 +34,7 @@ export default function Login(){
         let reqs = await fetch(configBD.urlRootNode +'login_user',{
             method: 'POST',
             headers: {
-                'Accept':'application/json',
+                Accept:'application/json',
                 'Content-Type':'application/json',
             },
             body: JSON.stringify({
