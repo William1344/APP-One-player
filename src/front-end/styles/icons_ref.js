@@ -9,6 +9,7 @@ const icons = {
     confgs      :   "setting", 
     reload      :   "sync",
     new_jg      :   "dribbble",
+    cores       :   "adjust",
     jogos       :   "",
     pesquisa    :   "magnifying-glass", // Entypo
     user        :   "user",

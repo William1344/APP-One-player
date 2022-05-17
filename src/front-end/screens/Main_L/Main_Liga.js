@@ -40,7 +40,7 @@ export default function Main_Liga({route}){
                 SalveDados(banco);
             }
         }
-        console.log("User da liga -> ", banco.ligas[0].list_users[0]);
+        //console.log("User da liga -> ", banco.ligas[0].list_users[0]);
         BackHandler.addEventListener("hardwareBackPress", backAction);
         return () => {BackHandler.removeEventListener("hardwareBackPress", backAction);}
     }, []);
@@ -52,10 +52,14 @@ export default function Main_Liga({route}){
         return true;
     }
 
-    function isAdmin(){
-        for(let us of route.params.liga.list_users)
-            if(us.idUsers == banco.userMaster.id)
+    async function isAdmin(liga){
+        for(let us of liga.list_users){
+            if(us.idUsers == banco.userMaster.id){
+                console.log("Entrou e encontrou ->", us.isAdmin);   
                 return us.isAdmin;
+            }
+        }
+        return false;
     }
 
     async function PersistLiga(){
@@ -71,7 +75,7 @@ export default function Main_Liga({route}){
                 jogos3x3    : route.params.liga.listJgs3x3.length,
                 jogos5x5    : route.params.liga.listJgs5x5.length,
                 pedidos     : route.params.liga.pedidos.length,
-            }),
+            })
         });
         let resp = await reqs.json();
         if(resp.status){
@@ -456,7 +460,7 @@ export default function Main_Liga({route}){
                     <TouchableOpacity
                         style = {styleM.btt_opacit}
                         onPress = {async () => {
-                            if(!isAdmin()){
+                            if(await isAdmin(route.params.liga)){
                                 navigation.replace("ConfigLiga",{
                                     liga        : route.params.liga,
                                     dest        : route.params.dest,

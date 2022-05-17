@@ -85,9 +85,9 @@ export default function Load(){
         fontes();
         
         setTimeout(()=>{
-            //checkToken();
-            _removeTokens();    
-            navigation.replace("Login");
+            checkToken();
+            //_removeTokens();    
+            //navigation.replace("Login");
         },1500);
         
     },[]);

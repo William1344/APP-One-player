@@ -12,10 +12,11 @@ import confgBD from '../../../../config/config.json';
 import { LigaV, User_LigaV, User_GameV } from '../../../back-end2/modelos/indexVars';
 import { Topo} from '../../components/index_comps';
 import Icon from 'react-native-vector-icons/AntDesign';
+import IconE from 'react-native-vector-icons/Entypo';
 import assets from "../../../../assets/index_assets";
 import stylesCP from '../LigaCreate/stylesCompLPesq';
 import {stylesMP, stylesC} from './styles/indexStyles';
-import { Cor, icons,  idiomaPort, idiomaEUA } from '../../styles/index_S';
+import { Cor, icons,  idiomaPort, idiomaEUA, SetaTema } from '../../styles/index_S';
 
 /*
  * Fazer: 
@@ -80,6 +81,7 @@ export default function Main_Players(){
 
     useEffect(() => {
         PersisteUser();
+
         //console.log("Ligas ", banco.ligas.length)
         //console.log("Liga -> \n", banco.ligas[0].confLiga);
         BackHandler.addEventListener("hardwareBackPress", backAction);
@@ -328,11 +330,13 @@ export default function Main_Players(){
                     </TouchableOpacity>
                     <TouchableOpacity 
                         style = {stylesMP.btt_new_liga}
-                        onPress = {() => {}} //navigation.navigate("")
+                        onPress = {async () => {
+                            Alert.alert("Aviso", "Disponível apenas nas cores dark!");
+                        }} 
                     >
-                        <Icon 
+                        <IconE 
                             style = {{marginTop: 10}}
-                            name    = {icons.setting}
+                            name    = {icons.cores}
                             color   = {Cor.icons_cor}
                             size    = {40}
                         />
