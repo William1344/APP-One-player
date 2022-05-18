@@ -1,4 +1,4 @@
-import { Cor } from './index_S';
+import Cor from './colors';
 import banco from '../../back-end2/banco_local';
 import SalveDado from '../../back-end2/SalveData';
 

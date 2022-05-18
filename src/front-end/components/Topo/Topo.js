@@ -39,19 +39,7 @@ export default function Topo(){
         SalveData(banco);
     };
     
-    async function createFormData(photo, body = {}){
-        const data = new FormData();
-        data.append("photo", {
-            name: photo.fileName,
-            type: photo.type,
-            uri : Platform.OS === "android" ? photo.uri : photo.uri.replace("file://", "")
-        });
-        Object.keys(body).forEach(key => {
-            data.append(key, body[key]);
-        });
-        console.log("Data creada",data)
-        return data;
-    }
+    
 
     async function setImgUserMaster(result){
         let reqs = await fetch(configsBD.urlRootNode+'salvar_image_user',{
@@ -73,8 +61,9 @@ export default function Topo(){
 
     function retorna_img(){
         if(banco.userMaster.image == null) return assets.play_lg;
-        else return banco.userMaster.image;
+        else return {uri: banco.userMaster.image};
     }
+    
 
     return(
         <>

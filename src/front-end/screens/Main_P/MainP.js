@@ -81,7 +81,7 @@ export default function Main_Players(){
 
     useEffect(() => {
         PersisteUser();
-
+        console.log("Image", banco.userMaster.image);
         //console.log("Ligas ", banco.ligas.length)
         //console.log("Liga -> \n", banco.ligas[0].confLiga);
         BackHandler.addEventListener("hardwareBackPress", backAction);
