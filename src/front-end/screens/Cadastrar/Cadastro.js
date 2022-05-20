@@ -7,7 +7,6 @@ import stylesC from './styles_Cad';
 import {useNavigation} from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import banco from '../../../back-end2/banco_local';
-import { UserV } from '../../../back-end2/modelos/indexVars';
 import assets from '../../../../assets/index_assets';
 import configsBD from '../../../../config/config.json';
 

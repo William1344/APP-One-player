@@ -6,7 +6,6 @@ import { View, Text, StatusBar, TouchableOpacity, Modal, FlatList, ScrollView,
 } from "react-native";
 import configDB from "../../../../config/config.json";
 import { useNavigation } from "@react-navigation/native";
-import {JogoV} from '../../../back-end2/modelos/indexVars';
 import {Cor, icons, styles} from "../../styles/index_S";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import banco from '../../../back-end2/banco_local';

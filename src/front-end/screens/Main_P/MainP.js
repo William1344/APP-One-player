@@ -9,7 +9,6 @@ import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import SalveDados from '../../../back-end2/SalveData';
 import banco from '../../../back-end2/banco_local';
 import confgBD from '../../../../config/config.json';
-import { LigaV, User_LigaV, User_GameV } from '../../../back-end2/modelos/indexVars';
 import { Topo} from '../../components/index_comps';
 import Icon from 'react-native-vector-icons/AntDesign';
 import IconE from 'react-native-vector-icons/Entypo';
@@ -17,6 +16,7 @@ import assets from "../../../../assets/index_assets";
 import stylesCP from '../LigaCreate/stylesCompLPesq';
 import {stylesMP, stylesC} from './styles/indexStyles';
 import { Cor, icons,  idiomaPort, idiomaEUA, SetaTema } from '../../styles/index_S';
+import {RetornaImg, RetornaImgL } from '../../functions/index';
 
 /*
  * Fazer: 
@@ -81,7 +81,7 @@ export default function Main_Players(){
 
     useEffect(() => {
         PersisteUser();
-        console.log("Image", banco.userMaster.image);
+        //console.log("Image", banco.userMaster.image);
         //console.log("Ligas ", banco.ligas.length)
         //console.log("Liga -> \n", banco.ligas[0].confLiga);
         BackHandler.addEventListener("hardwareBackPress", backAction);
@@ -154,13 +154,7 @@ export default function Main_Players(){
     function Comp_Pedido({item}){ 
         const dt = new Date(item.createdAt);
         const data = "Criada: "+ dt.getDate() + "/" + (dt.getMonth() + 1) + "/" + dt.getFullYear().toString()[2] + dt.getFullYear().toString()[3];
-        function retorna_img(){
-            if(item.image != null){
-                return item.image;
-            } else{
-                return assets.liga_lg;
-            }
-        }    
+        
         
         return(
             <View style={stylesCP.view_compFull}>
@@ -171,7 +165,7 @@ export default function Main_Players(){
                 }}
             >
                 <Image style = {stylesCP.img_logo}
-                    source = {retorna_img()}
+                    source = {RetornaImgL(item.img_log)}
                 /> 
                 <View style = {stylesCP.viewInf}>
                     <Text style = {stylesCP.textTitle}> - Aguardando - </Text>
@@ -188,13 +182,7 @@ export default function Main_Players(){
     function Comp_Liga({item, index}){
         const dt = new Date(item.createdAt);
         const data = "Criada: "+ dt.getDate() + "/" + (dt.getMonth() + 1) + "/" + dt.getFullYear().toString()[2] + dt.getFullYear().toString()[3];
-        function retorna_img(){
-            if(item.img_logo != null){
-                return item.img_logo
-            } else{
-                return assets.liga_lg
-            }
-        }    
+
         async function cancela_pedido(){
             
             let reqs = await fetch(confgBD.urlRootNode + 'cancela_pedido', {
@@ -262,7 +250,7 @@ export default function Main_Players(){
                     }
                 >
                     <Image style = {stylesC.img_logo}
-                        source = {retorna_img()}
+                        source = {RetornaImgL(item.img_log)}
                     /> 
                     <View style = {stylesC.viewInf}>
                         <Text style = {stylesC.textTitle}> {item.nome}</Text>
@@ -280,7 +268,7 @@ export default function Main_Players(){
         <View style = {stylesMP.telaFull}>
             <StatusBar hidden = {true}
                 barStyle="ligth-content"/>
-            <Topo/>
+            <Topo main = {true}/>
             <View style = {stylesMP.viewLiga}>
                 <TouchableOpacity style = {stylesMP.btt_Meio}
                     onPress = {() => {

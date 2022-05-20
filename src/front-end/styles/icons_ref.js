@@ -10,7 +10,7 @@ const icons = {
     reload      :   "sync",
     new_jg      :   "dribbble",
     cores       :   "adjust",
-    jogos       :   "",
+    mais        :   "pluscircle",
     pesquisa    :   "magnifying-glass", // Entypo
     user        :   "user",
     team        :   "team",

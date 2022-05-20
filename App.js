@@ -5,7 +5,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import {
     Cadastro, ConfigLiga, Form_User, LigaCreate, Load, Load3x3, Load5x5, Login, 
     MainP, MainL, Teste, NovoJg, Ranking, List_Jgs, View_Jg3, View_Jg5, 
-    Membros, ViewP
+    Membros, ViewP, Subst_Img
 } from "./src/front-end/screens/index_screens";
 
 
@@ -25,6 +25,11 @@ export default function App(){
                     <Stack.Screen
                         name        = "Cadastro"
                         component   = {Cadastro}
+                        options     = {{orientation : 'portrait'}}
+                    />
+                    <Stack.Screen
+                        name        = "Subst_Img"
+                        component   = {Subst_Img}
                         options     = {{orientation : 'portrait'}}
                     />
                     <Stack.Screen

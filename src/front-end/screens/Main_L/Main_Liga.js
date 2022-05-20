@@ -7,14 +7,13 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native"
 import { styleM, stylesJ, stylesCJ, stylesModal } from './styleshet/index_styles';
-import { User_LigaV, User_GameV } from '../../../back-end2/modelos/indexVars';
 import { Cor, icons, styles} from '../../styles/index_S';
 import * as ImagePicker from 'expo-image-picker';
 import SalveDados from '../../../back-end2/SalveData';
 import assets from "../../../../assets/index_assets";
 import banco from "../../../back-end2/banco_local";
 import configBD from "../../../../config/config.json";
-
+import { RetornaImg, RetornaImgL } from '../../functions/index';
 
 export default function Main_Liga({route}){
     const date          = new Date(route.params.liga.createdAt);
@@ -92,20 +91,6 @@ export default function Main_Liga({route}){
             });
         }
 
-    }
-
-    async function subst_imgL(){
-        let result = await ImagePicker.launchImageLibraryAsync({
-            selectionLimit: 1,
-            mediaType: 'photo',
-            includeBase64: false,   
-        });
-        if (!result.cancelled) {    
-            //let p = banco.ligas.indexOf(route.params.liga);
-            route.params.liga.img_logo = {uri : result.uri}
-            setRend(!rend);
-        }
-        SalveDados(banco);
     }
 
     async function add_jogadorB(apelido){
@@ -231,10 +216,7 @@ export default function Main_Liga({route}){
         return array;
     }
 
-    function retorna_imgLiga(liga){
-        if(liga.img_logo != null) return liga.img_logo
-        else return assets.liga_lg   
-    }
+   
     
     function nextDest(){
         const pos = route.params.dest.indexOf(dest_render);
@@ -242,17 +224,7 @@ export default function Main_Liga({route}){
         else setDest_render(route.params.dest[pos + 1]);
     }  
     
-    function retorna_imgJogador(user){
-        if(user != null){
-            if(user.image != null){        
-                return user.imgage
-            } else{
-                return assets.play_lg
-            }
-        } else {
-            return assets.play_lg
-        }
-    }
+    
     // modal
     function render_Modal(){
         // adicionar jogador anonimo!
@@ -323,7 +295,7 @@ export default function Main_Liga({route}){
             >
                 <Image
                     style = {stylesCJ.img}
-                    source = {retorna_imgJogador(item)}
+                    source = {RetornaImg(item.image)}
                 />
                 <View style = {stylesCJ.viewInfos}>
                     <Text style = {stylesCJ.text_infos}>{item.apelido} | {item.numero}|</Text>
@@ -346,7 +318,7 @@ export default function Main_Liga({route}){
               <View style = {styleM.view1CompDest}>
                 <Image
                     style = {styleM.imgCompDest}
-                    source = {retorna_imgJogador(item.user)}
+                    source = {RetornaImg(item.user.image)}
                 />
                 <View style = {styleM.viewInfosCompDest}>
                     <Text style = {{...styleM.textsInfos, fontSize: 16}}>{item.title}</Text>
@@ -373,7 +345,7 @@ export default function Main_Liga({route}){
                     onPress = {() => {subst_imgL()}}
                 >
                     <Image style = {{height:'100%', width:'100%',borderRadius: 90}}
-                        source = { retorna_imgLiga(route.params.liga) }
+                        source = { RetornaImgL(route.params.liga.img_log) }
                         resizeMode = "cover"
                     />
                 </TouchableOpacity>

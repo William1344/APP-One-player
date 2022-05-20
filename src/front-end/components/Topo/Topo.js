@@ -1,70 +1,25 @@
 import React, {useState, useEffect} from "react";
 import { View, Text, Image, StatusBar, TouchableOpacity} from "react-native";
+import * as ImagePicker from 'expo-image-picker';
+import { useNavigation } from "@react-navigation/native";
+import configsBD from '../../../../config/config.json';
 import styles from './styles_T';
 import banco from '../../../back-end2/banco_local';
-import configsBD from '../../../../config/config.json';
-import * as ImagePicker from 'expo-image-picker';
-import assets from '../../../../assets/index_assets';
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import assets from '../../../../assets/index_assets';
 import SalveData from '../../../back-end2/SalveData';
+import {RetornaImg} from '../../functions/index';
 
-export default function Topo(){
+
+export default function Topo(value){
     
     useEffect(() => {
-        (async () => {
-          if (Platform.OS !== 'web') {
-            const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-            if (status !== 'granted') {
-              alert('Sorry, we need camera roll permissions to make this work!');
-            }
-          }
-        })();
+        
     }, []);
     
+    const navigation = useNavigation();
     const [photo, setImg_perfil]  = useState(true);
     
-    
-    async function subst_img(){
-        let result = await ImagePicker.launchImageLibraryAsync({
-            selectionLimit: 1,
-            mediaType: 'photo',
-            includeBase64: false,   
-        });
-          console.log(result);
-          if (!result.cancelled) {
-            banco.userMaster.image = {uri : result.uri}
-            setImg_perfil(result);
-            await setImgUserMaster();        
-        }
-        SalveData(banco);
-    };
-    
-    
-
-    async function setImgUserMaster(result){
-        let reqs = await fetch(configsBD.urlRootNode+'salvar_image_user',{
-            method  : 'POST',
-            headers : {
-                'Accept'        :   'application/json',
-                'Content-Type'  :   'multipart/form-data',
-            },
-            body    : await createFormData(photo, {user_id: banco.userMaster.id}) 
-        });
-
-        let ress = await reqs.json();
-        if(ress.status){
-            console.log("Salvei com sucesso -> ");
-        } else {
-            console.log("Erro ao salvar imagem -> ");
-        }
-    }
-
-    function retorna_img(){
-        if(banco.userMaster.image == null) return assets.play_lg;
-        else return {uri: banco.userMaster.image};
-    }
-    
-
     return(
         <>
         <View style = {styles.viewSuperior}>
@@ -72,12 +27,13 @@ export default function Topo(){
                 hidden = {false} // esconde a barra "true"
                 barStyle="ligth-content"
             />
-            
             <TouchableOpacity style = {styles.btt_img}
-                onPress = {() => {subst_img()}}
+                onPress = {() => {
+                    if(value.main) navigation.replace("Subst_Img");
+                }}
             >
                 <Image style = {styles.img_logo}
-                    source = {retorna_img()}
+                    source = {RetornaImg(banco.userMaster.image)}
                 />
             </TouchableOpacity>
             <View style = {styles.view1_infos}>

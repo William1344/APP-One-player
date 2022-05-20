@@ -9,6 +9,7 @@ import {useNavigation} from '@react-navigation/native';
 import banco from '../../../back-end2/banco_local';
 import SalveData from '../../../back-end2/SalveData';
 import configBD from '../../../../config/config.json';
+import {RetornaImg} from '../../functions/index';
 
 export default function ViewP({route}){
   const navigation            = useNavigation();
@@ -52,10 +53,7 @@ export default function ViewP({route}){
     }
   }
   
-  function retornaImg(){
-    if(player.image == null) return assets.play_lg;
-    else return route.params.player.image;
-  }
+  
 
   function rend_Escores(){
     return(
@@ -224,30 +222,8 @@ export default function ViewP({route}){
   function ren_Dest(){
     return (<View></View>);
   }
-  
-  async function _testeTrocaImg(){
-    let result = await ImagePicker.launchImageLibraryAsync({
-      selectionLimit: 1,
-      mediaType: 'photo',
-      includeBase64: false,   
-    });
-    console.log("Result -> \n",result);
-    if (!result.cancelled) {
-      player.image = {uri : result.uri}
-      const img = {
-        uri: result.uri,
-        type: 'image/jpg',
-        name: 'teste.jpg',
-      };
-      setImg_perfil(result);
-      SalvarImgUser(img);
-      SalveData(banco);
-    }
-    //console.log("DataCreated -> \n", createFormData(result, {userId: banco.userMaster.id}))
     
-  };
-  
-    async function SalvarImgUser(result){
+/*async function SalvarImgUser(result){ // salvar imagem do usuário
     const data = new FormData();
     data.append('userId', banco.userMaster.id);
     data.append('photo', result);
@@ -267,15 +243,21 @@ export default function ViewP({route}){
       
     }
   }
+*/
 
   return(
     <View style = {stylesVP.telaFull}>
     <View style = {stylesVP.viewS}>
       <TouchableOpacity style = {stylesVP.viewIMG}
-        onPress = {() => {_testeTrocaImg()}}
+        onPress = {() => {
+          if(route.params.veio_de == "MainP")
+            navigation.replace("Subst_Img", {
+              veio_de : "MainP"
+            });
+        }}
       >
         <Image style = {stylesVP.img}
-          source = {retornaImg()}
+          source = {RetornaImg(player.image)}
         />
       </TouchableOpacity>
       <TouchableOpacity style = {stylesVP.viewInfosP}

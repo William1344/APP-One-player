@@ -9,7 +9,6 @@ import { useNavigation } from "@react-navigation/native";
 import {conf_Liga} from '../../styles/configsApp';
 import {Cor, styles, icons} from "../../styles/index_S";
 import configDB from "../../../../config/config.json";
-import {JogoV, JogoM, User_GameV, User_LigaV} from '../../../back-end2/modelos/indexVars';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import banco from '../../../back-end2/banco_local';
 import SalveData from '../../../back-end2/SalveData';
