@@ -52,12 +52,13 @@ export default function Main_Liga({route}){
     }
 
     async function isAdmin(liga){
-        for(let us of liga.list_users){
+        for(let us of route.params.liga.list_users){
             if(us.idUsers == banco.userMaster.id){
                 console.log("Entrou e encontrou ->", us.isAdmin);   
                 return us.isAdmin;
             }
         }
+        console.log("Não encontrou");
         return false;
     }
 
@@ -342,7 +343,15 @@ export default function Main_Liga({route}){
                 
                 
                 <TouchableOpacity style = {styleM.img_logo}
-                    onPress = {() => {subst_imgL()}}
+                    onPress = { async () => {
+                        if(await isAdmin()){
+                            navigation.replace("Subst_ImgLg",{
+                                liga        : route.params.liga,
+                                dest        : route.params.dest,
+                                index_liga  : route.params.index_liga
+                            });
+                        }
+                    }}
                 >
                     <Image style = {{height:'100%', width:'100%',borderRadius: 90}}
                         source = { RetornaImgL(route.params.liga.img_log) }

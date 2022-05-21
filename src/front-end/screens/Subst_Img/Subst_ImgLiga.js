@@ -13,12 +13,16 @@ import {RetornaImg} from '../../functions/index';
 import {Cor, icons} from '../../styles/index_S';
 import assets from '../../../../assets/index_assets';
 
-export default function Subst_Img(){
+export default function Subst_ImgLg({route}){
   const navigation = useNavigation();
   const [state, setState] = useState(false);
 
   function backAction(){
-    navigation.replace("MainP");
+    navigation.replace("MainL",{
+      liga        : route.params.liga,
+      dest        : route.params.dest,
+      index_liga  : route.params.index_liga,
+    });
     return true;
   }
 
@@ -28,22 +32,22 @@ export default function Subst_Img(){
   }, []);
 
   async function setar_Img(value){ // value é o valor referente ao icon
-    
-    if(banco.userMaster.image != value){
-      let reqs = await fetch(configBD.urlRootNode + 'salvar_img_user',{
+   
+    if(route.params.liga.img_log != value){
+      let reqs = await fetch(configBD.urlRootNode + 'salvar_img_liga',{
         method: 'POST',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          idUser  : banco.userMaster.id,
+          idLiga  : route.params.liga.id,
           val     : value
         })
       });
       let resp = await reqs.json();
       if(resp.status){
-        banco.userMaster.image = value;
+        route.params.liga.img_log = value;
         Alert.alert('Sucesso!', resp.msg);
         setState(!state);
       } else {
@@ -73,23 +77,23 @@ export default function Subst_Img(){
               onPress = {() => setar_Img(0)}
             >
               <Image style = {style_SI.img_logo}
-                source = {assets.play_lg} 
+                source = {assets.liga_lg} 
               />  
             </TouchableOpacity>  
           </View>
           <View style = {style_SI.linha}>
             <TouchableOpacity style = {style_SI.btt_img}
-              onPress = {async () => await setar_Img(2)}
+              onPress = {() => setar_Img(2)}
             >
               <Image style = {style_SI.img_logo}
-                source = {assets.play_lg2} 
+                source = {assets.liga_lg2} 
               />  
             </TouchableOpacity>
             <TouchableOpacity style = {style_SI.btt_img}
               onPress = {() => setar_Img(3)}
             >
               <Image style = {style_SI.img_logo}
-                source = {assets.play_lg3} 
+                source = {assets.liga_lg3} 
               />  
             </TouchableOpacity>  
           </View>
@@ -99,14 +103,14 @@ export default function Subst_Img(){
               onPress = {() => setar_Img(4)}
             >
               <Image style = {style_SI.img_logo}
-                source = {assets.play_lg4} 
+                source = {assets.liga_lg4} 
               />  
             </TouchableOpacity>
             <TouchableOpacity style = {style_SI.btt_img}
               onPress = {() => setar_Img(5)}
             >
               <Image style = {style_SI.img_logo}
-                source = {assets.play_lg5} 
+                source = {assets.liga_lg5} 
               />  
             </TouchableOpacity>  
           </View>
@@ -115,14 +119,14 @@ export default function Subst_Img(){
               onPress = {() => setar_Img(6)}
             >
               <Image style = {style_SI.img_logo}
-                source = {assets.play_lg6} 
+                source = {assets.liga_lg6} 
               />  
             </TouchableOpacity>
             <TouchableOpacity style = {style_SI.btt_img}
               onPress = {() => setar_Img(1)}
             >
               <Image style = {style_SI.img_logo}
-                source = {assets.play_lg1} 
+                source = {assets.liga_lg1} 
               />  
             </TouchableOpacity>  
           </View>
@@ -131,14 +135,14 @@ export default function Subst_Img(){
               onPress = {() => setar_Img(8)}
             >
               <Image style = {style_SI.img_logo}
-                source = {assets.play_lg8} 
+                source = {assets.liga_lg8} 
               />  
             </TouchableOpacity>
             <TouchableOpacity style = {style_SI.btt_img}
               onPress = {() => setar_Img(7)}
             >
               <Image style = {style_SI.img_logo}
-                source = {assets.play_lg7} 
+                source = {assets.liga_lg7} 
               />  
             </TouchableOpacity>  
           </View>
@@ -147,14 +151,14 @@ export default function Subst_Img(){
               onPress = {() => setar_Img(9)}
             >
               <Image style = {style_SI.img_logo}
-                source = {assets.play_lg9} 
+                source = {assets.liga_lg9} 
               />  
             </TouchableOpacity>
             <TouchableOpacity style = {style_SI.btt_img}
               onPress = {() => setar_Img(10)}
             >
               <Image style = {style_SI.img_logo}
-                source = {assets.play_lg10} 
+                source = {assets.liga_lg10} 
               />  
             </TouchableOpacity>  
           </View>
@@ -163,14 +167,14 @@ export default function Subst_Img(){
               onPress = {() => setar_Img(11)}
             >
               <Image style = {style_SI.img_logo}
-                source = {assets.play_lg11} 
+                source = {assets.liga_lg11} 
               />  
             </TouchableOpacity>
             <TouchableOpacity style = {style_SI.btt_img}
               onPress = {() => setar_Img(12)}
             >
               <Image style = {style_SI.img_logo}
-                source = {assets.play_lg12} 
+                source = {assets.liga_lg12} 
               />  
             </TouchableOpacity>  
           </View>

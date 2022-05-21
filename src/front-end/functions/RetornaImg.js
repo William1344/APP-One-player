@@ -1,6 +1,6 @@
 import assets from '../../../assets/index_assets';
 export default function RetornaImg(value){
-  if(value == 0)        return assets.play_lg;
+       if(value == 0)   return assets.play_lg;
   else if(value == 1)   return assets.play_lg1;
   else if(value == 2)   return assets.play_lg2;
   else if(value == 3)   return assets.play_lg3;
