@@ -13,6 +13,7 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import stylesR from './stylesR';
 import assets from "../../../../assets/index_assets";
+import { RetornaImgL } from '../../functions/index';
 
 export default function Ranking({route}){
     const navigation        = useNavigation();
@@ -94,14 +95,7 @@ export default function Ranking({route}){
         }        
     }
 
-    function retorna_img(liga){
-        if(liga.img_logo != null){
-            return liga.img_logo
-        } else{
-            return assets.liga_lg
-        }
-    }
-
+    
     return(
         <View style = {stylesR.telaFull}>
             <StatusBar
@@ -111,7 +105,7 @@ export default function Ranking({route}){
             <View style = {stylesR.viewTopo}>
                 <View style = {stylesR.viewTopoL}>
                     <Image style = {stylesR.imgLiga}
-                        source = {retorna_img(route.params.liga)}
+                        source = {RetornaImgL(route.params.liga.img_log)}
                         resizeMode="cover"
                     />
                     <View style = {stylesR.viewIN}>

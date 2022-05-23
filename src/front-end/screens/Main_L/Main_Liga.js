@@ -13,6 +13,7 @@ import SalveDados from '../../../back-end2/SalveData';
 import assets from "../../../../assets/index_assets";
 import banco from "../../../back-end2/banco_local";
 import configBD from "../../../../config/config.json";
+import { User_GameV } from "../../../back-end2/obj_resp/index";
 import { RetornaImg, RetornaImgL } from '../../functions/index';
 
 export default function Main_Liga({route}){
@@ -25,7 +26,8 @@ export default function Main_Liga({route}){
     const [tipoJG, setTipoJG]               = useState(true);
     const [rend, setRend]                   = useState(true);
     const [dest_render, setDest_render]     = useState(route.params.dest[0]);
-    
+    const [load, setLoad]       = useState(false); // true -> carregando
+
     useEffect(()=>{
         //console.log("Scores 5x5", route.params.liga.list_users[0].scr5x5);
         //console.log(route.params.liga.pedidos);
@@ -255,7 +257,8 @@ export default function Main_Liga({route}){
                                 placeholder     = "Apelido na liga"
                             />
                             <TouchableOpacity style = {stylesModal.btt_Meio}
-                                onPress = {() => {    
+                                onPress = {() => {  
+                                    
                                     add_jogadorB(textApel)
                                     setModalAdd(false);
                                 }}  
@@ -340,7 +343,13 @@ export default function Main_Liga({route}){
             <StatusBar hidden = {false}
                 barStyle="ligth-content"/>
             <View style = {styleM.viewS}>
-                
+                {load && 
+                    <ActivityIndicator
+                        style = {{position : "absolute", top : '50%', right: "50%", }}
+                        size = "large"
+                        color = {Cor.sec}
+                    />
+                }    
                 
                 <TouchableOpacity style = {styleM.img_logo}
                     onPress = { async () => {
@@ -387,6 +396,7 @@ export default function Main_Liga({route}){
                     <TouchableOpacity
                         style = {styleM.btt_opacit}
                         onPress = {async () => {
+                            console.log("Entrou aqui! btt");
                             await criaTimes();
                             navigation.replace("NovoJg",{
                                 liga        : route.params.liga,

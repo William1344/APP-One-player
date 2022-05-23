@@ -8,10 +8,11 @@ import { useNavigation } from '@react-navigation/native';
 import { Cor, icons } from '../../styles/index_S';
 import banco from '../../../back-end2/banco_local';
 import assets from "../../../../assets/index_assets";
+import { RetornaImg } from '../../functions/index';
 
-    var timeA  = new Array();
-    var timeB  = new Array();
-    var list_subs = new Array();
+    var timeA       = new Array();
+    var timeB       = new Array();
+    var list_subs   = new Array();
     var jogadores, timesL3, timesL5;
 
 export default function Novo_Jg({route}){
@@ -158,7 +159,7 @@ export default function Novo_Jg({route}){
     // selecionando os times, só preenche se um dos times estiver vazio
     // se o time B estiver vazio, precisa verificar se 
     const _preencheTime = function(time){
-        const removeTime = ()=>{
+        const removeTime = () => {
             if(modo3x3) {
                 let p = timesL3.indexOf(time)
                 timesL3.splice(p,1);
@@ -270,7 +271,7 @@ export default function Novo_Jg({route}){
 
 // funções renderizadoras
     // renderiza os FL para montar os times!
-    const renderTJS = function(){
+    function renderTJS(){
         if(jgdr_time)                   return rend_jogadores();
         else if(!jgdr_time && !timesOK) return rend_times();
         else if(!jgdr_time && timesOK) return rend_subs();
@@ -439,9 +440,8 @@ export default function Novo_Jg({route}){
             />
             <View style = {stylesNJ.viewTopo}>
                 <Image style = {stylesNJ.imgPf}
-                    source = {banco.userMaster.image == null ? assets.play_lg : banco.userMaster.image}
+                    source = {RetornaImg(banco.userMaster.image)}
                     resizeMode="cover"
-                    onPress = {()=>{}}
                 />
                 <TouchableOpacity style = {stylesNJ.bbtConf}>
                     <Icon
