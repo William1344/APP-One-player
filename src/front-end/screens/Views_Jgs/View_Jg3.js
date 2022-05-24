@@ -95,21 +95,21 @@ export default function ViewGame_3x3({route}){
                             <Text style = {stylesV3.textScor}> {timeA[0].a_3pts} </Text>
                         </TouchableOpacity>
 
-                        {conf_Liga.rebts ? <TouchableOpacity style = {stylesV3.bttScor}>
+                        {conf_Liga.rebts && <TouchableOpacity style = {stylesV3.bttScor}>
                             <Text style = {stylesV3.textScor}> {timeA[0].reb} </Text>
-                        </TouchableOpacity> : <></>}
+                        </TouchableOpacity>}
 
-                        {conf_Liga.assts ? <TouchableOpacity style = {stylesV3.bttScor}>
+                        {conf_Liga.assts && <TouchableOpacity style = {stylesV3.bttScor}>
                             <Text style = {stylesV3.textScor}> {timeA[0].asst} </Text>
-                        </TouchableOpacity> : <></>}
+                        </TouchableOpacity>}
 
-                        {conf_Liga.blks ? <TouchableOpacity style = {stylesV3.bttScor}>
+                        {conf_Liga.blks && <TouchableOpacity style = {stylesV3.bttScor}>
                             <Text style = {stylesV3.textScor}> {timeA[0].blk} </Text>
-                        </TouchableOpacity> : <></>}
+                        </TouchableOpacity>}
 
-                        {conf_Liga.airB ? <TouchableOpacity style = {stylesV3.bttScor}>
+                        {conf_Liga.airB && <TouchableOpacity style = {stylesV3.bttScor}>
                             <Text style = {stylesV3.textScor}> {timeA[0].airB} </Text>
-                        </TouchableOpacity> : <></>}
+                        </TouchableOpacity>}
                     </View>
 
                     {/* timeA[1] */}
@@ -126,26 +126,26 @@ export default function ViewGame_3x3({route}){
                             <Text style = {stylesV3.textScor}> {timeA[1].a_3pts} </Text>
                         </TouchableOpacity>
 
-                        {conf_Liga.rebts ? <TouchableOpacity style = {stylesV3.bttScor}>
+                        {conf_Liga.rebts && <TouchableOpacity style = {stylesV3.bttScor}>
                             <Text style = {stylesV3.textScor}> {timeA[1].reb} </Text>
-                        </TouchableOpacity> : <></>}
+                        </TouchableOpacity>}
 
-                        {conf_Liga.assts ? <TouchableOpacity style = {stylesV3.bttScor}>
+                        {conf_Liga.assts && <TouchableOpacity style = {stylesV3.bttScor}>
                             <Text style = {stylesV3.textScor}> {timeA[1].asst} </Text>
-                        </TouchableOpacity> : <></>}
+                        </TouchableOpacity>}
 
-                        {conf_Liga.blks ? <TouchableOpacity style = {stylesV3.bttScor}>
+                        {conf_Liga.blks && <TouchableOpacity style = {stylesV3.bttScor}>
                             <Text style = {stylesV3.textScor}> {timeA[1].blk} </Text>
-                        </TouchableOpacity> : <></>}
+                        </TouchableOpacity>}
 
-                        {conf_Liga.airB ? <TouchableOpacity style = {stylesV3.bttScor}>
+                        {conf_Liga.airB && <TouchableOpacity style = {stylesV3.bttScor}>
                             <Text style = {stylesV3.textScor}> {timeA[1].airB} </Text>
-                        </TouchableOpacity> : <></>}
+                        </TouchableOpacity>}
                     </View>
 
                     {/* timeA[2] */}
                     <View style = {stylesV3.viewComp}> 
-                        <TouchableOpacity style = {stylesV3.bttNome}>
+                        <TouchableOpacity style = {{...stylesV3.bttNome, borderBottomLeftRadius: 30}}>
                             <Text style = {stylesV3.textNome}> {timeA[2].apelido} </Text>
                         </TouchableOpacity>
 
@@ -157,21 +157,21 @@ export default function ViewGame_3x3({route}){
                             <Text style = {stylesV3.textScor}> {timeA[2].a_3pts} </Text>
                         </TouchableOpacity>
 
-                        {conf_Liga.rebts ? <TouchableOpacity style = {stylesV3.bttScor}>
+                        {conf_Liga.rebts && <TouchableOpacity style = {stylesV3.bttScor}>
                             <Text style = {stylesV3.textScor}> {timeA[2].reb} </Text>
-                        </TouchableOpacity> : <></>}
+                        </TouchableOpacity>}
 
-                        {conf_Liga.assts ? <TouchableOpacity style = {stylesV3.bttScor}>
+                        {conf_Liga.assts && <TouchableOpacity style = {stylesV3.bttScor}>
                             <Text style = {stylesV3.textScor}> {timeA[2].asst} </Text>
-                        </TouchableOpacity> : <></>}
+                        </TouchableOpacity>}
 
-                        {conf_Liga.blks ? <TouchableOpacity style = {stylesV3.bttScor}>
+                        {conf_Liga.blks && <TouchableOpacity style = {stylesV3.bttScor}>
                             <Text style = {stylesV3.textScor}> {timeA[2].blk} </Text>
-                        </TouchableOpacity> : <></>}
+                        </TouchableOpacity>}
 
-                        {conf_Liga.airB ? <TouchableOpacity style = {stylesV3.bttScor}>
+                        {conf_Liga.airB && <TouchableOpacity style = {{...stylesV3.bttScor, borderBottomRightRadius: 30}}>
                             <Text style = {stylesV3.textScor}> {timeA[2].airB} </Text>
-                        </TouchableOpacity> : <></>}
+                        </TouchableOpacity>}
                     </View>
 
                 </View>
@@ -193,21 +193,21 @@ export default function ViewGame_3x3({route}){
                             <Text style = {stylesV3.textScor}> {timeB[0].a_3pts} </Text>
                         </TouchableOpacity>
 
-                        {conf_Liga.rebts ? <TouchableOpacity style = {stylesV3.bttScor}>
+                        {conf_Liga.rebts && <TouchableOpacity style = {stylesV3.bttScor}>
                             <Text style = {stylesV3.textScor}> {timeB[0].reb} </Text>
-                        </TouchableOpacity> : <></>}
+                        </TouchableOpacity>}
 
-                        {conf_Liga.assts ? <TouchableOpacity style = {stylesV3.bttScor}>
+                        {conf_Liga.assts && <TouchableOpacity style = {stylesV3.bttScor}>
                             <Text style = {stylesV3.textScor}> {timeB[0].asst} </Text>
-                        </TouchableOpacity> : <></>}
+                        </TouchableOpacity>}
 
-                        {conf_Liga.blks ? <TouchableOpacity style = {stylesV3.bttScor}>
+                        {conf_Liga.blks && <TouchableOpacity style = {stylesV3.bttScor}>
                             <Text style = {stylesV3.textScor}> {timeB[0].blk} </Text>
-                        </TouchableOpacity> : <></>}
+                        </TouchableOpacity>}
 
-                        {conf_Liga.airB ? <TouchableOpacity style = {stylesV3.bttScor}>
+                        {conf_Liga.airB && <TouchableOpacity style = {stylesV3.bttScor}>
                             <Text style = {stylesV3.textScor}> {timeB[0].airB} </Text>
-                        </TouchableOpacity> : <></>}
+                        </TouchableOpacity>}
                     </View>
 
                     {/* timeB[1] */}
@@ -224,26 +224,26 @@ export default function ViewGame_3x3({route}){
                             <Text style = {stylesV3.textScor}> {timeB[1].a_3pts} </Text>
                         </TouchableOpacity>
 
-                        {conf_Liga.rebts ? <TouchableOpacity style = {stylesV3.bttScor}>
+                        {conf_Liga.rebts && <TouchableOpacity style = {stylesV3.bttScor}>
                             <Text style = {stylesV3.textScor}> {timeB[1].reb} </Text>
-                        </TouchableOpacity> : <></>}
+                        </TouchableOpacity>}
 
-                        {conf_Liga.assts ? <TouchableOpacity style = {stylesV3.bttScor}>
+                        {conf_Liga.assts && <TouchableOpacity style = {stylesV3.bttScor}>
                             <Text style = {stylesV3.textScor}> {timeB[1].asst} </Text>
-                        </TouchableOpacity> : <></>}
+                        </TouchableOpacity>}
 
-                        {conf_Liga.blks ? <TouchableOpacity style = {stylesV3.bttScor}>
+                        {conf_Liga.blks && <TouchableOpacity style = {stylesV3.bttScor}>
                             <Text style = {stylesV3.textScor}> {timeB[1].blk} </Text>
-                        </TouchableOpacity> : <></>}
+                        </TouchableOpacity>}
 
-                        {conf_Liga.airB ? <TouchableOpacity style = {stylesV3.bttScor}>
+                        {conf_Liga.airB && <TouchableOpacity style = {stylesV3.bttScor}>
                             <Text style = {stylesV3.textScor}> {timeB[1].airB} </Text>
-                        </TouchableOpacity> : <></>}
+                        </TouchableOpacity>}
                     </View>
 
                     {/* timeB[2] */}
                     <View style = {stylesV3.viewComp}> 
-                        <TouchableOpacity style = {stylesV3.bttNome}>
+                        <TouchableOpacity style = {{...stylesV3.bttNome, borderBottomLeftRadius: 30}}>
                             <Text style = {stylesV3.textNome}> {timeB[2].apelido} </Text>
                         </TouchableOpacity>
 
@@ -255,21 +255,21 @@ export default function ViewGame_3x3({route}){
                             <Text style = {stylesV3.textScor}> {timeB[2].a_3pts} </Text>
                         </TouchableOpacity>
 
-                        {conf_Liga.rebts ? <TouchableOpacity style = {stylesV3.bttScor}>
+                        {conf_Liga.rebts && <TouchableOpacity style = {stylesV3.bttScor}>
                             <Text style = {stylesV3.textScor}> {timeB[2].reb} </Text>
-                        </TouchableOpacity> : <></>}
+                        </TouchableOpacity>}
 
-                        {conf_Liga.assts ? <TouchableOpacity style = {stylesV3.bttScor}>
+                        {conf_Liga.assts && <TouchableOpacity style = {stylesV3.bttScor}>
                             <Text style = {stylesV3.textScor}> {timeB[2].asst} </Text>
-                        </TouchableOpacity> : <></>}
+                        </TouchableOpacity>}
 
-                        {conf_Liga.blks ? <TouchableOpacity style = {stylesV3.bttScor}>
+                        {conf_Liga.blks && <TouchableOpacity style = {stylesV3.bttScor}>
                             <Text style = {stylesV3.textScor}> {timeB[2].blk} </Text>
-                        </TouchableOpacity> : <></>}
+                        </TouchableOpacity>}
 
-                        {conf_Liga.airB ? <TouchableOpacity style = {stylesV3.bttScor}>
+                        {conf_Liga.airB && <TouchableOpacity style = {{...stylesV3.bttScor, borderBottomRightRadius: 30}}>
                             <Text style = {stylesV3.textScor}> {timeB[2].airB} </Text>
-                        </TouchableOpacity> : <></>}
+                        </TouchableOpacity>}
                     </View>
                 </View>
             );
@@ -326,10 +326,10 @@ export default function ViewGame_3x3({route}){
                         <Text style = {stylesV3.bttNome}> Jogador </Text>
                         <Text style = {stylesV3.bttScor}> 2Pts </Text>
                         <Text style = {stylesV3.bttScor}> 3Pts </Text>
-                        { conf_Liga.rebts ? <Text style = {stylesV3.bttScor}> Reb </Text> : <></>}
-                        { conf_Liga.assts ? <Text style = {stylesV3.bttScor}> Asst </Text> : <></>}
-                        { conf_Liga.blks ? <Text style = {stylesV3.bttScor}> Blk </Text> : <></>}
-                        { conf_Liga.airB ? <Text style = {stylesV3.bttScor}> AirB </Text> : <></>}
+                        { conf_Liga.rebts && <Text style = {stylesV3.bttScor}> Reb </Text>}
+                        { conf_Liga.assts && <Text style = {stylesV3.bttScor}> Asst </Text>}
+                        { conf_Liga.blks && <Text style = {stylesV3.bttScor}> Blk </Text>}
+                        { conf_Liga.airB && <Text style = {stylesV3.bttScor}> AirB </Text>}
                     </View>
                     <View style = {stylesV3.viewJog}>
                         {renderTime()}

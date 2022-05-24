@@ -9,7 +9,7 @@ const stylesVJ = StyleSheet.create({
     },
 
     viewInf:{
-        height: '76%',
+        height: '90%',
         width: '99%',
         justifyContent: 'flex-start',
         alignItems: 'center',
@@ -81,7 +81,7 @@ viewInferioir: {
                 justifyContent: 'space-around',
                 alignItems: 'center',
                 width: '100%',
-                height: '50%', 
+                height: '60%', 
             },
                 viewTimeX:{
                     justifyContent: 'center',
@@ -95,7 +95,7 @@ viewInferioir: {
 
     // View jogos 3x3 e 5x5
     viewTop:{
-        height: "24%",
+        height: "28%",
         width: '100%',
         borderWidth: 1,
         borderTopLeftRadius: 30,
@@ -154,7 +154,7 @@ viewInferioir: {
             flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'space-around',
-            height: '17.5%',
+            height: '20%',
             width: '100%',
         },
             btt_SelTime:{
@@ -173,7 +173,7 @@ viewInferioir: {
         viewTabJog: {
             justifyContent: 'flex-start',
             alignItems: 'center',
-            height: '82.5%',
+            height: '80%',
             width: '100%',
 
         },
@@ -206,7 +206,7 @@ viewInferioir: {
                     justifyContent: 'center',
                     alignItems: 'center',
                     width: '100%',
-                    height: 34,
+                    flex: 1,
                 },
                     bttNome:{
                         height: '100%',
@@ -220,7 +220,7 @@ viewInferioir: {
                     },
                     textNome:{
                         flex: 1,
-                        fontSize: 18,
+                        fontSize: 20,
                         color: Cor.font,
                         fontWeight: "bold",
                         textAlign: "center",

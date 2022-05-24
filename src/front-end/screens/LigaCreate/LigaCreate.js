@@ -26,9 +26,9 @@ export default function LigaCreate({route}){
   const [corB, setCorB]           = useState(Cor.btt);
   const [corC, setCorC]           = useState(Cor.btt);
   const [rotul, setRotul]         = useState("Buscar Ligas");
-  const [textCodResg, setCodResg] = useState("35");
-  const [textName, setTN]         = useState("Militao");
-  const [textApel, setTA]         = useState("Tarouco");
+  const [textCodResg, setCodResg] = useState("");
+  const [textName, setTN]         = useState("");
+  const [textApel, setTA]         = useState("");
   const [textLocal, setLocal]     = useState(""); // posso buscar o local no cel com API
     
   useEffect(() => {

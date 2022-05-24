@@ -14,8 +14,8 @@ import CompLoad from '../Load/CompLoad';
 
 export default function Login(){
     const navigation            = useNavigation();
-    const [textName, setName]   = useState("will@gmail.com");
-    const [textSenha, setSenha] = useState("123");
+    const [textName, setName]   = useState("");
+    const [textSenha, setSenha] = useState("");
     const [modLoad, setModLoad] = useState(false);
 
     let totalPnts = 0;
@@ -25,12 +25,12 @@ export default function Login(){
         banco.ligas        = [];
         banco.userMaster   = null;
         banco.ress_servidor= null;
-        console.log("Zerou banco local");
+        //console.log("Zerou banco local");
     }, []);
 
     const verifLogin = async function(nm, sn){
         setModLoad(true);
-        console.log("entrou-> ",configBD.urlRootNode)
+        //console.log("entrou-> ",configBD.urlRootNode)
         let reqs = await fetch(configBD.urlRootNode +'login_user',{
             method: 'POST',
             headers: {

@@ -3,7 +3,7 @@ import ConfigLiga   from "./Configs_Liga/ConfigLiga";
 import Form_User    from './Form_User/Form_User';
 import LigaCreate   from './LigaCreate/LigaCreate';
 import Load         from './Load/Load';
-import Load3x3      from './Load_3x3/Load3x3_2';
+import Load3x3      from './Load_3x3/Load3x3';
 import Load5x5      from './Load_5x5/Load5x5';
 import Login        from './Login/Login';
 import MainP        from './Main_P/MainP';

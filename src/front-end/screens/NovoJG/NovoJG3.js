@@ -37,7 +37,7 @@ export default function Novo_Jg({route}){
     const [cor3     , setCor3]      = useState(Cor.btt_sel);
     const [cor5     , setCor5]      = useState(Cor.btt);
     const [subs     , setSubs]      = useState(false);
-    const [jgdr_time, setJT]        = useState(true);
+    const [jgdr_time, setJT]        = useState(false);
     
     useEffect(() => { 
         jogadores   = route.params.liga.list_usersG.slice();

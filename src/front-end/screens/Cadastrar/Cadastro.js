@@ -13,9 +13,9 @@ import SalveData from '../../../back-end2/SalveData';
 
 export default function Cadastro(){
     const navigation = useNavigation();
-    const [textName, setName] = useState("Talou Odissi");
-    const [textEmail, setEmail] = useState("talouc@gmail.com");
-    const [textPasword, setPasword] = useState("123");
+    const [textName, setName] = useState("");
+    const [textEmail, setEmail] = useState("");
+    const [textPasword, setPasword] = useState("");
     
     useEffect(() => {
         BackHandler.addEventListener("hardwareBackPress", backAction);
