@@ -74,6 +74,7 @@ const stylesVP = StyleSheet.create({
             width               : '95%',
         },
             btt_title:{
+                flexDirection   : 'row',
                 justifyContent  : 'center',
                 alignItems      : 'center',
                 height          : '12%',

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {Text, FlatList, View, StatusBar, Image, 
-        TouchableOpacity, Modal, KeyboardAvoidingView, 
+        TouchableOpacity, Modal, KeyboardAvoidingView, ActivityIndicator,
         TextInput, Alert, Keyboard, BackHandler, ScrollView, Switch
     } from 'react-native';
 import Icon               from "react-native-vector-icons/AntDesign";
@@ -11,7 +11,7 @@ import configBD           from "../../../../config/config.json";
 import {styles, Cor, icons}   from "../../styles/index_S";
 import stylesCFL          from "./stylesCFL";
 import assets             from "../../../../assets/index_assets";
-
+import { RetornaImg }     from "../../functions/index";
 
 
 
@@ -31,6 +31,7 @@ export default function ConfigLiga({route}){
   const [ airB, setAirB ]           = useState(confs.airB);
   const [ roubo, setRoubo ]         = useState(confs.roubo);    // futuro
   const [ alterado, setAlterado ]   = useState(false);
+  const [ load, setLoad]            = useState(false);
 
   useEffect (() => {
     BackHandler.addEventListener("hardwareBackPress", backAction);
@@ -52,7 +53,7 @@ export default function ConfigLiga({route}){
     });
     return true;
   }
-  
+
   function render_configs(){
     /* Requisitos de configurações 
       - Usuário:
@@ -69,6 +70,7 @@ export default function ConfigLiga({route}){
           - Block?
           - Air Ball?
           - Roubo?
+      - Deletar liga
     */
     return (
       <View style = {stylesCFL.viewScrool}>
@@ -222,13 +224,29 @@ export default function ConfigLiga({route}){
             ios_backgroundColor = "#3e3e3e"             
           />
         </View>*/}
+        <View style = {stylesCFL.viewLinha}>
+          <TouchableOpacity style = {stylesCFL.bttLinha}
+            onPress = {() => {
+              Alert.alert("Certeza?", "Você realmente deseja deletar está liga? Todos seus jogos serão perdidos!",
+              [
+                {text: "Deletar", onPress: () => {
+                  setLoad(false);
+                  deletarLiga();
+                }},
+                {text: "Cancelar", onPress: () => {}, style: "cancel"},
+              ]);
+            }}
+          >
+            <Text style = {stylesCFL.btt_text}> Deletar Liga </Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }  
 
   async function salveConfigs(){
     confs.marc24      = marc24;    
-    confs.selSubs     = selSubs;  
+    confs.selSubs     = subs_auto;  
     confs.faltas      = faltas;
     confs.auto_troca  = auto_troca;
     confs.rebote      = rebote;
@@ -238,7 +256,8 @@ export default function ConfigLiga({route}){
     confs.roubo       = roubo;
     // salvar as novas configurações no banco de dados
     if(alterado){
-      let reqs = await fetch(configBD.urlRootNode + "salvar_conf_liga", {
+      console.log("ENTROU -> confis", confs);
+      let reqs = await fetch(configBD.urlRootNode+"salvar_conf_liga", {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -253,7 +272,7 @@ export default function ConfigLiga({route}){
       if(ress.status){
         // salvar nova conf da liga e salvar no banco local
         Alert.alert("Sucesso", "Configurações salvas com sucesso!");
-        console.log("Salvou suas configurações");
+        //console.log("Salvou suas configurações");
         SalveData(banco);
         setAlterado(false);
       } else {
@@ -263,15 +282,46 @@ export default function ConfigLiga({route}){
     }
   }
 
+  async function deletarLiga(){
+
+    let reqs = await fetch(configBD.urlRootNode+"deletar_liga", {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        idLiga : route.params.liga.id,
+      }),
+    });
+    let ress = await reqs.json();
+    if(ress.status){
+      // deletar liga e salvar no banco local
+      Alert.alert("Sucesso", "Liga deletada com sucesso!");
+      SalveData(banco);
+      navigation.navigate("MainP");
+    } else {
+
+    }
+
+  }
+
   return(
     <View style={stylesCFL.telaFull}>
       <StatusBar 
         hidden = {false}
         barStyle="ligth-content"
       />
+      {load && 
+        <ActivityIndicator
+          style = {{position : "absolute", top : '50%', right: "50%", }}
+          size = "large"
+          color = {Cor.sec}
+        />
+      }
       <View style = {stylesCFL.viewTopo}>
         <Image style = {stylesCFL.imgPf}
-          source = {banco.userMaster.image == null ? assets.play_lg : banco.userMaster.image}
+          source = {RetornaImg(banco.userMaster.image)}
           resizeMode="cover"
         />
         <View style = {stylesCFL.viewInfos}>
@@ -294,6 +344,7 @@ export default function ConfigLiga({route}){
       >
         <Text style = {stylesCFL.btt_text}> Salvar </Text>
       </TouchableOpacity>
+      
     </View>
   );
 }

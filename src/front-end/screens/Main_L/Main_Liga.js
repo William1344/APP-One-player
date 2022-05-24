@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {Text, FlatList, View, StatusBar, Image, 
         TouchableOpacity, Modal, KeyboardAvoidingView, 
-        TextInput, Alert, Keyboard, BackHandler
+        TextInput, Alert, Keyboard, BackHandler, ActivityIndicator
     } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -19,14 +19,14 @@ import { RetornaImg, RetornaImgL } from '../../functions/index';
 export default function Main_Liga({route}){
     const date          = new Date(route.params.liga.createdAt);
     const navigation    = useNavigation();
-    const [cod_NewUser, setCod_NewUser]     = useState("");
-    const [textApel, setTA]                 = useState("");
-    const [modalAdd, setModalAdd]           = useState(false);
-    const [ped, setPedido]                  = useState(Cor.white);
-    const [tipoJG, setTipoJG]               = useState(true);
-    const [rend, setRend]                   = useState(true);
-    const [dest_render, setDest_render]     = useState(route.params.dest[0]);
-    const [load, setLoad]       = useState(false); // true -> carregando
+    const [cod_NewUser, setCod_NewUser]     =  useState("");
+    const [textApel, setTA]                 =  useState("");
+    const [modalAdd, setModalAdd]           =  useState(false);
+    const [ped, setPedido]                  =  useState(Cor.white);
+    const [tipoJG, setTipoJG]               =  useState(true);
+    const [rend, setRend]                   =  useState(true);
+    const [dest_render, setDest_render]     =  useState(route.params.dest[0]);
+    const [load, setLoad]                   = useState(false); // true -> carregando
 
     useEffect(()=>{
         //console.log("Scores 5x5", route.params.liga.list_users[0].scr5x5);
@@ -139,7 +139,7 @@ export default function Main_Liga({route}){
             //Alert.alert("Seu apelido deve conter entre 3 e 15 caracteres");
             console.log("Seu apelido deve conter entre 3 e 15 caracteres");
         }
-        
+        setLoad(false);
     }
      
     async function criaTimes(){
@@ -219,14 +219,11 @@ export default function Main_Liga({route}){
         return array;
     }
 
-   
-    
     function nextDest(){
         const pos = route.params.dest.indexOf(dest_render);
         if(pos == route.params.dest.length - 1) setDest_render(route.params.dest[0]);
         else setDest_render(route.params.dest[pos + 1]);
     }  
-    
     
     // modal
     function render_Modal(){
@@ -258,7 +255,7 @@ export default function Main_Liga({route}){
                             />
                             <TouchableOpacity style = {stylesModal.btt_Meio}
                                 onPress = {() => {  
-                                    
+                                    setLoad(true);
                                     add_jogadorB(textApel)
                                     setModalAdd(false);
                                 }}  
@@ -284,6 +281,7 @@ export default function Main_Liga({route}){
             </Modal>  
         );
     }
+
     // componentes
     function Comp_jgdr({item}){
         
@@ -310,6 +308,7 @@ export default function Main_Liga({route}){
             </View>
         );
     }
+
     function comp_destaques(item){
         return(
             <TouchableOpacity style = {styleM.comp_destaques}
@@ -342,14 +341,15 @@ export default function Main_Liga({route}){
             {render_Modal()}
             <StatusBar hidden = {false}
                 barStyle="ligth-content"/>
+            {load && 
+                <ActivityIndicator
+                    style = {{position : "absolute", top : '50%', right: "50%", }}
+                    size = "large"
+                    color = {Cor.sec}
+                />
+            }
             <View style = {styleM.viewS}>
-                {load && 
-                    <ActivityIndicator
-                        style = {{position : "absolute", top : '50%', right: "50%", }}
-                        size = "large"
-                        color = {Cor.sec}
-                    />
-                }    
+                    
                 
                 <TouchableOpacity style = {styleM.img_logo}
                     onPress = { async () => {
@@ -435,9 +435,13 @@ export default function Main_Liga({route}){
                     
                     <TouchableOpacity 
                         style = {styleM.btt_opacit}
-                        onPress = {() => {
-                            setModalAdd(!modalAdd)
-                            setTA("");
+                        onPress = {async () => {
+                            if(await isAdmin(route.params.liga)){
+                                setModalAdd(!modalAdd)
+                                setTA("");
+                            } else {
+                                Alert.alert("Você não é administrador da liga!")
+                            }
                         }} //navigation.navigate("")
                     >
                         <Icon 

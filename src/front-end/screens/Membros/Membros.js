@@ -11,6 +11,7 @@ import banco            from '../../../back-end2/banco_local';
 import confgBD          from '../../../../config/config.json';
 import assets           from '../../../../assets/index_assets';
 import SalveDate        from '../../../back-end2/SalveData';
+import { RetornaImg }   from '../../functions/index';
 
 export default function Membros({route}){
     const navigation = useNavigation();
@@ -132,12 +133,7 @@ export default function Membros({route}){
             ])
         }
     }
-
-    function retornaImg(user){
-        if(user.image == null) return assets.play_lg;
-        else return user.image;
-    }
-    
+  
     function render_Modal(){
         return(
             <Modal
@@ -224,7 +220,7 @@ export default function Membros({route}){
                 }}
             >
                 <Image style = {stylesMem.img_logoFL}
-                    source = {retornaImg(item)}
+                    source = {RetornaImg(item.image)}
                     resizeMode="cover"
                 />
                 <View style = {stylesMem.viewInfos_FL}>

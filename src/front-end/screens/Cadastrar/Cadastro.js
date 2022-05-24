@@ -9,11 +9,12 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import banco from '../../../back-end2/banco_local';
 import assets from '../../../../assets/index_assets';
 import configsBD from '../../../../config/config.json';
+import SalveData from '../../../back-end2/SalveData';
 
 export default function Cadastro(){
     const navigation = useNavigation();
-    const [textName, setName] = useState("Beat");
-    const [textEmail, setEmail] = useState("Beaasd@gmail.com");
+    const [textName, setName] = useState("Talou Odissi");
+    const [textEmail, setEmail] = useState("talouc@gmail.com");
     const [textPasword, setPasword] = useState("123");
     
     useEffect(() => {
@@ -45,9 +46,9 @@ export default function Cadastro(){
 
         let res = await reqs.json();
         if(res.status){
-            console.log("Cadastrou com sucesso -> ", res);
+            //console.log("Cadastrou com sucesso -> ", res);
             banco.userMaster = res.dado;
-            _salveData(banco);
+            SalveData(banco);
             navigation.replace("Form_User",{
                 idUser  : banco.userMaster.id,
                 player  : banco.userMaster,

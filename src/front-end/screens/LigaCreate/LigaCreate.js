@@ -26,9 +26,9 @@ export default function LigaCreate({route}){
   const [corB, setCorB]           = useState(Cor.btt);
   const [corC, setCorC]           = useState(Cor.btt);
   const [rotul, setRotul]         = useState("Buscar Ligas");
-  const [textCodResg, setCodResg] = useState("34");
+  const [textCodResg, setCodResg] = useState("35");
   const [textName, setTN]         = useState("Militao");
-  const [textApel, setTA]         = useState("Joce");
+  const [textApel, setTA]         = useState("Tarouco");
   const [textLocal, setLocal]     = useState(""); // posso buscar o local no cel com API
     
   useEffect(() => {
@@ -45,10 +45,10 @@ export default function LigaCreate({route}){
   },[]);
 
   useEffect(() => { // seta os valores de imput cada vez que mudar o componente
-    setTN("");
+    /*setTN("");
     setTA("");
     setLocal("");
-    setCodResg("");
+    setCodResg("");*/
   },[new_liga]);
 
   function backAction(){
@@ -140,7 +140,7 @@ export default function LigaCreate({route}){
             />
             <TextInput style = {stylesLC.txt_input}
               value           = {textCodResg}
-              onChangeText    = {(tt)=>{setCod_resg(tt)}}
+              onChangeText    = {(tt)=>{setCodResg(tt)}}
               placeholder     = "Seu código de resgate"
             />
             <TextInput style = {stylesLC.txt_input}

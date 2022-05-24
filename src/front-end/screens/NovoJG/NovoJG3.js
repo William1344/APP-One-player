@@ -33,8 +33,8 @@ export default function Novo_Jg({route}){
     const [timesOK  , setTimesOK]   = useState(false);
     const [textIA   , setTextIA]    = useState("Time A");
     const [textIB   , setTextIB]    = useState("Time B");
-    const [t_times  , setTTimes]    = useState("Jogadores");
-    const [cor3     , setCor3]      = useState(Cor.btt);
+    const [t_times  , setTimes]     = useState("Jogadores");
+    const [cor3     , setCor3]      = useState(Cor.btt_sel);
     const [cor5     , setCor5]      = useState(Cor.btt);
     const [subs     , setSubs]      = useState(false);
     const [jgdr_time, setJT]        = useState(true);
@@ -43,10 +43,11 @@ export default function Novo_Jg({route}){
         jogadores   = route.params.liga.list_usersG.slice();
         timesL3     = route.params.liga.list_times3.slice();
         timesL5     = route.params.liga.list_times5.slice();
-        _zeraTimes();//
+        setModo(true);
+        //_zeraTimes();//
         setTimeout(()=>{
             setState(!state);
-        }, 300);
+        }, 150);
         BackHandler.addEventListener("hardwareBackPress", backAction);
         return () => BackHandler.removeEventListener("hardwareBackPress", backAction);
     }, []);
@@ -64,12 +65,16 @@ export default function Novo_Jg({route}){
         setTimesOK(false);
         setSubs(false);
         setModo3x3(false);
-        setModo5x5(false);
-        setCor3(Cor.btt);
-        setCor5(Cor.btt);
-        
+        setModo5x5(false);       
     }
-
+    function preencheJgdrs(){
+        if(list_subs.length > 0){
+            for(let jgd of list_subs){
+                jogadores.push(jgd);
+            }
+            list_subs.splice(0, list_subs.length);
+        }
+    }
     // seta o modo de jogo
     function setModo(modo){
         _zeraTimes();
@@ -78,8 +83,7 @@ export default function Novo_Jg({route}){
                 setCor3(Cor.btt);
                 setModo3x3(false);
                 console.log("3x3 -> false");
-            }
-            else {
+            } else {
                 setCor3(Cor.btt_sel);
                 setCor5(Cor.btt);
                 setModo3x3(true);
@@ -91,8 +95,7 @@ export default function Novo_Jg({route}){
             if(modo5x5){
                 setCor5(Cor.btt);
                 setModo5x5(false);
-            }
-            else{
+            } else{
                 //preenche_5x5();
                 setTimesOK(false);
                 setCor5(Cor.btt_sel);
@@ -102,20 +105,51 @@ export default function Novo_Jg({route}){
                 console.log("true 5x5");
             }
         }   
+        setaComp();
     } 
+    
+    function verifyEstado(){
+        if(timesOK){
+            if(modo3x3)
+                if(timeA.length != 3 || timeB.length != 3){
+                    setTimesOK(false);
+                    preencheJgdrs();
+                    setaComp();
+                }
+            else
+                if(timeA.length != 5 || timeB.length != 5){
+                    setTimesOK(false);
+                    preencheJgdrs();
+                    setaComp();
+                }   
+        }
+        
+    }
+
+    function ret_Jgdr(jgd){
+        for(let jg of jogadores){
+            if(jgd.Users_idUsers == jg.Users_idUsers){
+                //console.log("jogador encontrado", jg, "->\n", jgd);
+                return jogadores.indexOf(jg);
+            }
+        }
+    }
     // adiciona e remove jogadores ao time, sempre cuidando modo de jogo
     // caso mude os times são zerados.
-    const addTime = function(item){
+    function addTime(item){
         if(modo3x3){
             if(timeA.length < 3){
                 //console.log("Jogador 0 W", jogadores[0])
                 timeA.push(item);
-                let pos = jogadores.indexOf(item);
+                //console.log("Jogador veio", item);
+                let pos = ret_Jgdr(item);
+                //console.log("Posição", pos)
+                //console.log("Encontrado", jogadores[pos]);
                 jogadores.splice(pos, 1);
                 setState(!state);
             } else if(timeB.length < 3){
                 timeB.push(item);
-                let pos = jogadores.indexOf(item);
+                let pos = ret_Jgdr(item);
                 jogadores.splice(pos, 1);
                 setState(!state);
             }
@@ -123,13 +157,13 @@ export default function Novo_Jg({route}){
                 setListSubs();
                 setJT(false)
                 setTimesOK(true); 
-                setTTimes("Substitutos");
+                setTimes("Substitutos");
                 console.log("TimesOK -> true")
             } 
             else if((timeA.length < 3 || timeB.length < 3) && timesOK) setTimesOK(false);
             else if(timesOK && (timeA.length == 3) && (timeB.length == 3)){
                 list_subs.push(item);
-                let pos = jogadores.indexOf(item);
+                let pos = ret_Jgdr(item);
                 jogadores.splice(pos, 1);
                 setState(!state);
             }
@@ -137,12 +171,12 @@ export default function Novo_Jg({route}){
         } else if(modo5x5){
             if(timeA.length < 5){
                 timeA.push(item);
-                let pos = jogadores.indexOf(item);
+                let pos = ret_Jgdr(item);
                 jogadores.splice(pos, 1);
                 setState(!state);
             } else if(timeB.length < 5){
                 timeB.push(item);
-                let pos = jogadores.indexOf(item);
+                let pos = ret_Jgdr(item);
                 jogadores.splice(pos, 1);
                 setState(!state);
             }
@@ -150,7 +184,7 @@ export default function Novo_Jg({route}){
                 setListSubs();
                 setJT(false)
                 setTimesOK(true);
-                setTTimes("Substitutos");
+                setTimes("Substitutos");
                 console.log("TimesOK -> true")
             } 
             else if((timeA.length < 5 || timeB.length < 5) && timesOK) setTimesOK(false);        
@@ -158,8 +192,8 @@ export default function Novo_Jg({route}){
     }
     // selecionando os times, só preenche se um dos times estiver vazio
     // se o time B estiver vazio, precisa verificar se 
-    const _preencheTime = function(time){
-        const removeTime = () => {
+    function _preencheTime(time){
+        function removeTime(){
             if(modo3x3) {
                 let p = timesL3.indexOf(time)
                 timesL3.splice(p,1);
@@ -172,13 +206,11 @@ export default function Novo_Jg({route}){
         if(timeA.length == 0){ 
             for(let jgd of time) addTime(jgd);
             removeTime();
-        }
-        else if(timeB.length == 0 && ((modo3x3 && timeA.length == 3) ||(modo5x5 && timeA.length == 5))){
+        } else if(timeB.length == 0 && ((modo3x3 && timeA.length == 3) ||(modo5x5 && timeA.length == 5))){
             for(let jgd of time){
                 for(let jgdA of timeA){
-                    if(jgd.id_User == jgdA.id_User) break;
-                    else if(timeA.indexOf(jgdA) == timeA.length - 1)
-                        addTime(jgd);
+                    if(jgd.Users_idUsers == jgdA.Users_idUsers) break;
+                    else if(timeA.indexOf(jgdA) == timeA.length -1) addTime(jgd);
                 }
             }
             removeTime();
@@ -187,35 +219,37 @@ export default function Novo_Jg({route}){
 
     }
     // preenche lista de subs após completar os times
-    const setListSubs = function(){
+    function setListSubs(){
         if(route.params.liga.confLiga.selSubs){
             for (let jgd of jogadores) list_subs.push(jgd);
             jogadores = new Array();
         }
     }
     // seta as variaveis para selecionar o componente certo (jgdrs || times || subs)
-    const setaComp = function(){
-        if(!jgdr_time)                  setTTimes("Jogadores");
-        else if(jgdr_time && !timesOK)  setTTimes("Times");
-        else if(jgdr_time && timesOK )  setTTimes("Substitutos");
+    function setaComp(){
+        if(!jgdr_time)                  setTimes("Jogadores");
+        else if(jgdr_time && !timesOK)  setTimes("Times");
+        else if(jgdr_time && timesOK )  setTimes("Substitutos");
         setJT(!jgdr_time)
     }
     // remove time A
-    const remTimeA = function(item){
+    function remTimeA(item){
         jogadores.push(item);
         let pos = timeA.indexOf(item);
         timeA.splice(pos, 1);
         setState(!state);
+        verifyEstado();
     }
     // remove time B
-    const remTimeB = function(item){
+    function remTimeB(item){
         jogadores.push(item);
         let pos = timeB.indexOf(item);
         timeB.splice(pos, 1);
         setState(!state);
+        verifyEstado();
     }
     // remove subs
-    const remSubs = function(item){
+    function remSubs(item){
         jogadores.push(item);
         let pos = list_subs.indexOf(item);
         list_subs.splice(pos, 1);
@@ -224,7 +258,7 @@ export default function Novo_Jg({route}){
 
     // starta para a proxima tela, se modo de jogo 3x3 || 5x5 = true 
     // && timeA e timeB com 3 ou 5 jogadores conforme o modo de jogo
-    const start_Game = function(){
+    function start_Game(){
         if(timesOK){
             console.log("timesOK -> true");
             // monta timeA com 3 ou 5 jogadores conforme o (timeN.length)
@@ -364,15 +398,13 @@ export default function Novo_Jg({route}){
         // times
     function compTimes({item}) {
         return(
-            <TouchableOpacity style = {{...stylesNJ.viewCompTime, marginBottom: 3}}
+            <TouchableOpacity style = {{...stylesNJ.viewCompTime, marginBottom: 3, height: 'auto'}}
                 onPress = {()=>{ _preencheTime(item)}}
             >
                 <Text style = {stylesNJ.textTime}> Time </Text>
                 <Text style = {stylesNJ.textTime}> {item[0].apelido} | {item[1].apelido} | {item[2].apelido}</Text>
-                {modo5x5 ? 
+                {modo5x5 &&
                     <Text style = {stylesNJ.textTime}> {item[3].apelido} | {item[4].apelido}</Text>
-                :
-                    <></>
                 }
             </TouchableOpacity>
         );
@@ -398,7 +430,7 @@ export default function Novo_Jg({route}){
             )        
     };
         // time B
-    const compTimeB = function({item}) {
+    function compTimeB({item}) {
         return(
             <TouchableOpacity style = {stylesNJ.viewBttFL}
                 onPress = {() => {remTimeB(item)}}
@@ -408,7 +440,7 @@ export default function Novo_Jg({route}){
             )        
     };
         // substitutos
-    const compSubs = function({item}) {
+    function compSubs({item}) {
         return(
             <TouchableOpacity style = {stylesNJ.viewBttFL}
                 onPress = {() => {remSubs(item)}}
@@ -420,7 +452,7 @@ export default function Novo_Jg({route}){
     
 //funções de teste    
     //teste -> função para preencher times com 5 jogadores e list subs.
-    const preenche_5x5 = () => {
+    function preenche_5x5(){
         for(let x = 0 ; x < jogadores.length ; x++){
             if(timeA.length < 5)
                 timeA.push(jogadores[x]);

@@ -22,5 +22,6 @@
   },
   "migrationStorage":"json",
   "migrationStorageTableSchema": "custom_schema",
-  "urlRootNode": "http://192.168.0.14:3001/"
-} 
+  "urlRootNode1": "http://192.168.0.14:3001/",
+  "urlRootNode": "https://oneplayerapi.azurewebsites.net/"
+}

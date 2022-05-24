@@ -62,6 +62,12 @@ export default function ViewP({route}){
           onPress = {() =>{setaTipoEsc()}}
         >
           <Text style = {{...stylesVP.texts, fontSize: 26, marginTop: 5}}> {esc} </Text>
+          <Icon 
+            style = {{marginLeft: 20}}
+            name = {icons.seta_right}
+            size = {30}
+            color = {Cor.icons_cor}
+          />
         </TouchableOpacity>
         {renderScores()}
       </View>
