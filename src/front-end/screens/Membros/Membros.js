@@ -157,6 +157,7 @@ export default function Membros({route}){
                                         index_liga  :   route.params.index_liga,
                                         player      :   itemOP,
                                         veio_de     :   "Membros",
+                                        isAdmin     :   route.params.isAdmin,
                                     });
                                 }}
                             >
@@ -215,6 +216,7 @@ export default function Membros({route}){
                             dest    : route.params.dest,
                             veio_de : "Membros",
                             player  : item,
+                            isAdmin : route.params.isAdmin
                         });
                     }
                 }}
@@ -258,7 +260,7 @@ export default function Membros({route}){
                 barStyle="ligth-content"
             />
             <Topo/>
-            { ped && route.params.isAdmin ? render_Pedidos() : null }
+            { ped && route.params.isAdmin && render_Pedidos()}
             <View style = {stylesMem.viewMembros}>
                 <Text style = {stylesMem.titleM}> Membros </Text>
                 <SafeAreaView style = {stylesMem.viewInferioir}>

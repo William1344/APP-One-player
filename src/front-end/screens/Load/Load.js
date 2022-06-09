@@ -94,7 +94,6 @@ export default function Load(){
         
     async function _removeTokens() {
         const jsBanco = await AsyncStorage.removeItem("Banco");
-        
         console.log(jsBanco);    
     }
 

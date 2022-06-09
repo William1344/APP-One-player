@@ -14,8 +14,8 @@ import CompLoad from '../Load/CompLoad';
 
 export default function Login(){
     const navigation            = useNavigation();
-    const [textName, setName]   = useState("");
-    const [textSenha, setSenha] = useState("");
+    const [textName, setName]   = useState("will@gmail.com");
+    const [textSenha, setSenha] = useState("123");
     const [modLoad, setModLoad] = useState(false);
 
     let totalPnts = 0;

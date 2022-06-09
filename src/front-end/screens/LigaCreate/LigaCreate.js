@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { 
-  Alert, BackHandler, FlatList, Image, KeyboardAvoidingView, Text, TextInput, 
-  TouchableOpacity, View, Modal
+  Alert, BackHandler, FlatList, Image, KeyboardAvoidingView, Text, 
+  TextInput, TouchableOpacity, View, Modal
 } from 'react-native';
 import Icon             from 'react-native-vector-icons/Entypo';
 import {useNavigation}  from '@react-navigation/native';
@@ -21,7 +21,7 @@ export default function LigaCreate({route}){
   const [new_liga, setNewLiga]    = useState(1);
   const [modalAdd, setModalAdd]   = useState(false);
   const [itemLiga, setItemLiga]   = useState([]);
-  const [idLiga, setIdLiga]      = useState(null);
+  const [idLiga, setIdLiga]       = useState(null);
   const [corA, setCorA]           = useState(Cor.btt_sel);
   const [corB, setCorB]           = useState(Cor.btt);
   const [corC, setCorC]           = useState(Cor.btt);
@@ -41,14 +41,13 @@ export default function LigaCreate({route}){
       setCorC(Cor.btt);
     BackHandler.addEventListener("hardwareBackPress", backAction);
     return () => {BackHandler.removeEventListener("hardwareBackPress", backAction);}
-    
   },[]);
 
   useEffect(() => { // seta os valores de imput cada vez que mudar o componente
-    /*setTN("");
+    setTN("");
     setTA("");
     setLocal("");
-    setCodResg("");*/
+    setCodResg("");
   },[new_liga]);
 
   function backAction(){
@@ -56,7 +55,6 @@ export default function LigaCreate({route}){
     return true;
   }
 
-  
   function renderizar_inputs(){
     
     if(new_liga == 0){ // pesquisar ligas
@@ -432,7 +430,7 @@ export default function LigaCreate({route}){
               }  
             }}
           >
-            <Text style = {stylesLC.text_btt}> Resgatar </Text>
+            <Text style = {stylesLC.text_btt}>nodemon Resgatar </Text>
           </TouchableOpacity>
         </View>
         <Text style = {stylesLC.title_imputs}> {rotul} </Text>
